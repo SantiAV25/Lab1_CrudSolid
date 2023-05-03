@@ -36,9 +36,9 @@ public class Factory {
      * @param type cadena que indica qué tipo de clase hija debe instanciar
      * @return una clase hija de la abstracción IProductRepository
      */
-    public IRepository<Product> getRepository(String type) {
+    public IProductRepository getRepository(String type) {
 
-         IRepository<Product> result = null;
+         IProductRepository result = null;
 
         switch (type) {
             case "default":
@@ -50,9 +50,9 @@ public class Factory {
 
     }
 
-    public  IRepository<Category> getRepositoryCategory(String type) {
+    public  IcategoryRepository getRepositoryCategory(String type) {
 
-         IRepository<Category> result = null;
+         IcategoryRepository result = null;
 
         switch (type) {
             case "default":

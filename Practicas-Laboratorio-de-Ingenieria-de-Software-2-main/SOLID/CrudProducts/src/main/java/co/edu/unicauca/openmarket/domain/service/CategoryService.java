@@ -5,6 +5,7 @@
 package co.edu.unicauca.openmarket.domain.service;
 
 import co.edu.unicauca.openmarket.access.IRepository;
+import co.edu.unicauca.openmarket.access.IcategoryRepository;
 import co.edu.unicauca.openmarket.domain.Category;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public class CategoryService {
 
-    private  IRepository<Category> repository;
+    private  IcategoryRepository repository;
 
-    public CategoryService(IRepository<Category> repository) {
+    public CategoryService(IcategoryRepository repository) {
         this.repository = repository;
     }
 

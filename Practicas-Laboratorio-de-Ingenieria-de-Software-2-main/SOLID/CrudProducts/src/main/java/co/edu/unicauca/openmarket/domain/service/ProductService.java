@@ -1,5 +1,6 @@
 package co.edu.unicauca.openmarket.domain.service;
 
+import co.edu.unicauca.openmarket.access.IProductRepository;
 import co.edu.unicauca.openmarket.access.IRepository;
 import co.edu.unicauca.openmarket.domain.Category;
 import co.edu.unicauca.openmarket.domain.Product;
@@ -14,7 +15,7 @@ public class ProductService {
 
     // Ahora hay una dependencia de una abstracción, no es algo concreto,
     // no sabe cómo está implementado.
-    private IRepository<Product> repository;
+    private IProductRepository repository;
 
     /**
      * Inyección de dependencias en el constructor. Ya no conviene que el mismo
@@ -22,7 +23,7 @@ public class ProductService {
      *
      * @param repository una clase hija de IProductRepository
      */
-    public ProductService(IRepository<Product> repository) {
+    public ProductService(IProductRepository repository) {
         this.repository = repository;
     }
 
@@ -71,6 +72,13 @@ public class ProductService {
             return false;
         }
         return repository.edit(productId, prod);
+    }
+    
+     public List<Product> findByCategoryID(Long id){
+        List<Product> products = new ArrayList<>();
+        products = repository.findByCategoryID(id);
+        System.out.println("Entro En EcontrarCategoria en service"+id);
+        return products;
     }
 
 }

@@ -80,7 +80,6 @@ public class GUI extends javax.swing.JFrame {
         tblProducts = new javax.swing.JTable();
         lblTitle10 = new javax.swing.JLabel();
         rdoId = new javax.swing.JRadioButton();
-        rdoCategoria = new javax.swing.JRadioButton();
         txtNameP = new javax.swing.JTextField();
         btnCreateProduct1 = new co.edu.unicauca.openmarket.presentation.ui.MyButton();
         btnSearch = new co.edu.unicauca.openmarket.presentation.ui.MyButton();
@@ -88,6 +87,7 @@ public class GUI extends javax.swing.JFrame {
         lblTitle14 = new javax.swing.JLabel();
         txtDescriptionP1 = new javax.swing.JTextField();
         rdoName = new javax.swing.JRadioButton();
+        rdoCategoria = new javax.swing.JRadioButton();
 
         lblTitle4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblTitle4.setToolTipText("");
@@ -328,7 +328,7 @@ public class GUI extends javax.swing.JFrame {
                 txtSearchPActionPerformed(evt);
             }
         });
-        jPanelProduct.add(txtSearchP, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 240, 30));
+        jPanelProduct.add(txtSearchP, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 240, 30));
 
         btnSearchAll.setBackground(new java.awt.Color(251, 106, 0));
         btnSearchAll.setBorder(null);
@@ -362,7 +362,7 @@ public class GUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProducts);
 
-        jPanelProduct.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 850, 250));
+        jPanelProduct.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 850, 220));
 
         lblTitle10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitle10.setText("Categoria:");
@@ -374,17 +374,6 @@ public class GUI extends javax.swing.JFrame {
         rdoId.setSelected(true);
         rdoId.setText("Id");
         jPanelProduct.add(rdoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
-
-        rdoCategoria.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoCategoria);
-        rdoCategoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        rdoCategoria.setLabel("Categoria del producto");
-        rdoCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoCategoriaActionPerformed(evt);
-            }
-        });
-        jPanelProduct.add(rdoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
 
         txtNameP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         jPanelProduct.add(txtNameP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 240, 30));
@@ -442,7 +431,13 @@ public class GUI extends javax.swing.JFrame {
         buttonGroup1.add(rdoName);
         rdoName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         rdoName.setText("Nombre del producto");
-        jPanelProduct.add(rdoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, -1, -1));
+        jPanelProduct.add(rdoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
+
+        rdoCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rdoCategoria);
+        rdoCategoria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        rdoCategoria.setText("Categoria del producto");
+        jPanelProduct.add(rdoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, -1, -1));
 
         jTabbedPane2.addTab("tab1", jPanelProduct);
 
@@ -525,10 +520,15 @@ public class GUI extends javax.swing.JFrame {
                 Messages.showMessageDialog("Debe ingresar un dato numerico", "Atención");
                 return;
             }
+            System.out.println("Entra a product Seleccion");
             lista.add(productService.findProductById(Long.parseLong(this.txtSearchP.getText())));
+            System.out.println(lista.get(0));
             fillTableP(lista);
         } else if(rdoName.isSelected()){
             lista = (ArrayList) productService.findByName(this.txtSearchP.getText());
+            fillTableP(lista);
+        }else{
+            lista = (ArrayList<Product>) productService.findByCategoryID(Long.parseLong(this.txtSearchP.getText()));
             fillTableP(lista);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -562,10 +562,6 @@ public class GUI extends javax.swing.JFrame {
     private void txtSearchPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchPActionPerformed
-
-    private void rdoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoCategoriaActionPerformed
 
     private void fillTableP(List<Product> listProducts) {
         if (listIsNull(listProducts)) {

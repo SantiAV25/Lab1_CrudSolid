@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author INGESIS
  */
-public class CategoryRepository implements IRepository<Category>{
+public class CategoryRepository implements IcategoryRepository{
 
     private Connection conn;
 

@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  *
  * @author Libardo, Julio
  */
-public class ProductRepository implements IRepository<Product> {
+public class ProductRepository implements IProductRepository {
 
-    private Connection conn;
+    protected Connection conn;
 
     public ProductRepository() {
         initDatabase();
@@ -231,6 +231,36 @@ public class ProductRepository implements IRepository<Product> {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
+    }
+
+    @Override
+    public List<Product> findByCategoryID(Long id) {
+         try {
+     
+        List<Product> products = new ArrayList<>();
+
+        String sql = "SELECT * FROM products WHERE categoryid = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setLong(1, 2);
+
+        ResultSet res = pstmt.executeQuery();
+
+        while (res.next()) {
+            Product prod = new Product();
+            prod.setProductId(res.getLong("productId"));
+            prod.setName(res.getString("name"));
+            prod.setDescription(res.getString("description"));
+            prod.setCategory(new Category(res.getLong("categoryid"),""));
+            products.add(prod);
+        }
+        
+        
+        return products;
+    } catch (SQLException ex) {
+        Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        return null;
+    }
     }
 
 }

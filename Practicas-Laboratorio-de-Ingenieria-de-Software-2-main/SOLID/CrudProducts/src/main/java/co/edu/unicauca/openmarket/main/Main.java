@@ -18,11 +18,12 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        IRepository<Product> repository = Factory.getInstance().getRepository("default");
+        IProductRepository repository = Factory.getInstance().getRepository("default");
         ProductService productService = new ProductService(repository);
 
-         IRepository<Category> repositoryCategory = Factory.getInstance().getRepositoryCategory("default");
+         IcategoryRepository repositoryCategory = Factory.getInstance().getRepositoryCategory("default");
         CategoryService categoryService = new CategoryService(repositoryCategory);
+        
 
         GUI instance = new GUI(productService, categoryService);
         instance.setVisible(true);
