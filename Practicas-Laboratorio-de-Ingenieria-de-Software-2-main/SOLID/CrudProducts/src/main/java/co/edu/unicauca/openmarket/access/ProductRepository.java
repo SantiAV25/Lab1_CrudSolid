@@ -191,6 +191,7 @@ public class ProductRepository implements IRepository<Product> {
                 prod.setProductId(res.getLong("productId"));
                 prod.setName(res.getString("name"));
                 prod.setDescription(res.getString("description"));
+                prod.setCategory(new Category(res.getLong("categoryid"),""));
                 return prod;
             } else {
                 return null;
@@ -221,6 +222,7 @@ public class ProductRepository implements IRepository<Product> {
                 newProduct.setProductId(res.getLong("productId"));
                 newProduct.setName(res.getString("name"));
                 newProduct.setDescription(res.getString("description"));
+                newProduct.setCategory(new Category(res.getLong("categoryid"),""));
                 products.add(newProduct);
             }
             //this.disconnect();
